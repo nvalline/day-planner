@@ -10,22 +10,31 @@ $('#currentDay').append(currentDate);
 $.each(workHours, (function (i, hour) {
     console.log(hour)
     // add new Row element with class row
-    let newRowElement = $('.container').append('<section>');
+    const newRowElement = $('<section>');
+    $('.container').append(newRowElement);
     $('section').addClass('row');
 
-    // add new work hour element with class hour
-    let newTimeElement = $('.row').append('<div>');
-    newTimeElement.children('div').addClass('time-block hour');
-    $('.hour').text(hour);
+    // add new work hour element with class hour & p element
+    const newTimeElement = $('<div>');
+    const newPElement = $('<p>');
+    newRowElement.append(newTimeElement);
+    newTimeElement.addClass('hour');
+    newTimeElement.append(newPElement);
+
+    // print workHours to time element
+    newPElement.text(hour);
 
     // add new input element with class task
-    let newInputElement = $('.row').append('<textarea>');
+    const newInputElement = $('<textarea>');
+    newRowElement.append(newInputElement);
 
     // add new button element with class saveBtn
-    let newButtonElement = $('.row').append('<button>');
-    newTimeElement.children('button').addClass('saveBtn');
+    const newButtonElement = $('<button>');
+    newRowElement.append(newButtonElement);
+    newButtonElement.addClass('saveBtn');
 
     // add new button icon with class far fa-save
-    let newButtonIcon = $('button').append('<i>');
-    newButtonIcon.children('i').addClass('far fa-save');
+    const newButtonIcon = $('<i>');
+    newButtonElement.append(newButtonIcon);
+    newButtonIcon.addClass('far fa-save');
 }));
