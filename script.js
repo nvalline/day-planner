@@ -8,7 +8,6 @@ $('#currentDay').append(currentDate);
 
 // loop through workHours
 $.each(workHours, (function (i, hour) {
-    console.log(hour)
     // add new Row element with class row
     const newRowElement = $('<section>');
     $('.container').append(newRowElement);
@@ -20,6 +19,7 @@ $.each(workHours, (function (i, hour) {
     newRowElement.append(newTimeElement);
     newTimeElement.addClass('hour');
     newTimeElement.append(newPElement);
+    newPElement.addClass('time-block');
 
     // print workHours to time element
     newPElement.text(hour);
@@ -27,14 +27,21 @@ $.each(workHours, (function (i, hour) {
     // add new input element with class task
     const newInputElement = $('<textarea>');
     newRowElement.append(newInputElement);
+    newInputElement.attr('data-id', i);
 
     // add new button element with class saveBtn
     const newButtonElement = $('<button>');
     newRowElement.append(newButtonElement);
-    newButtonElement.addClass('saveBtn');
+    newButtonElement.addClass('saveBtn').attr('data-id', i);
 
     // add new button icon with class far fa-save
     const newButtonIcon = $('<i>');
     newButtonElement.append(newButtonIcon);
-    newButtonIcon.addClass('far fa-save');
+    newButtonIcon.addClass('far fa-save').attr('data-id', i);
 }));
+
+// add click listner on saveBtn
+$('.saveBtn').on('click', function (event) {
+    console.log(event)
+})
+
