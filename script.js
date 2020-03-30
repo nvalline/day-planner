@@ -8,6 +8,7 @@ const workHours = ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:
 // Get Current Date and Time
 $('#currentDay').append(currentDate);
 
+init();
 
 // loop through workHours
 $.each(workHours, (function (i, hour) {
@@ -52,7 +53,7 @@ $('.saveBtn').on('click', function (event) {
     console.log(event)
     const buttonId = $(this).data();
     const textareaId = event.currentTarget.previousSibling.dataset.id;
-    const textareaValue = event.currentTarget.previousSibling.value;
+    const textareaValue = event.currentTarget.previousSibling.value.trim();
     console.log("Button ID: " + JSON.stringify(buttonId))
     console.log(textareaId)
     console.log(textareaValue)
@@ -62,4 +63,19 @@ $('.saveBtn').on('click', function (event) {
         taskItems.push({ textareaId: textareaId, textareaValue: textareaValue });
         console.log(taskItems)
     }
+
+    storeTasks();
 })
+
+function init() {
+    let storedTasks = JSON.parse(localStorage.getItem('taskItems'));
+
+    if (storeTasks !== null) {
+        taskItems = storedTasks;
+    }
+    console.log(taskItems)
+}
+
+function storeTasks() {
+    localStorage.setItem('taskItems', JSON.stringify(taskItems));
+}
