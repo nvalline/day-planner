@@ -2,7 +2,7 @@
 
 # Work Day Scheduler
 
-![Project Image](project-image-url)
+<img src="./dev-img/planner.png" alt="Work Day Scheduler">
 
 > Short Project Blurb
 
