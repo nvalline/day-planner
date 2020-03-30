@@ -61,9 +61,13 @@ $('.saveBtn').on('click', function (event) {
     if (textareaValue === '') {
         return
     } else if ($('textarea').hasClass('past')) {
-        alert('This time block is in the past.');
-        $('textarea').val('');
-        return
+        let reply = confirm('Are you sure you want to add a task to the past?');
+        if (reply) {
+            taskItems.push({ 'textareaId': textareaId, 'textareaValue': textareaValue });
+        } else {
+            $('textarea').val('');
+            return
+        }
     } else {
         taskItems.push({ 'textareaId': textareaId, 'textareaValue': textareaValue });
     }
