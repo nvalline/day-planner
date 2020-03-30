@@ -49,7 +49,9 @@ $.each(workHours, (function (i, hour) {
         newInputElement.addClass('present').removeClass('past');
     }
 
-    renderTasks();
+    if (taskItems != null) {
+        renderTasks();
+    }
 }));
 
 // add click listner on saveBtn
@@ -59,17 +61,19 @@ $('.saveBtn').on('click', function (event) {
     if (textareaValue === '') {
         return
     } else {
-        taskItems.push({ textareaId: textareaId, textareaValue: textareaValue });
+        taskItems.push({ 'textareaId': textareaId, 'textareaValue': textareaValue });
     }
     storeTasks();
 })
-console.log(taskItems)
 
 function init() {
     let storedTasks = JSON.parse(localStorage.getItem('taskItems'));
 
-    if (storeTasks !== null) {
+    if (storedTasks != null) {
         taskItems = storedTasks;
+    }
+    else {
+        taskItems = [];
     }
 }
 
