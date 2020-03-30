@@ -121,13 +121,18 @@ $('.saveBtn').on('click', function (event) {
 
 ## References
 
+- Nate Valline
+- [MDN Web Docs](https://developer.mozilla.org/en-US/)
+- [W3Schools](https://www.w3schools.com/)
+- [Google](https://www.google.com) 
+
 [Back To The Top](#project-name)
 
 ---
 
 ## License
 
-Copyright (c) [2020][nate valline]
+Copyright (c) 2020 Nate Valline]
 
 [Back To The Top](#project-name)
 
