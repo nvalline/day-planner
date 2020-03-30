@@ -132,7 +132,7 @@ $('.saveBtn').on('click', function (event) {
 
 ## License
 
-Copyright (c) 2020 Nate Valline]
+Copyright (c) 2020 Nate Valline
 
 [Back To The Top](#project-name)
 
