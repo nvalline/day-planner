@@ -1,4 +1,6 @@
 let taskItems = [];
+let textareaId = '';
+let textareaValue = '';
 
 const currentDate = moment().format('dddd, MMMM Do, YYYY');
 const currentTime = moment().format('H');
@@ -26,7 +28,8 @@ $.each(workHours, (function (i, hour) {
     newPElement.text(hour);
 
     // add new input element with class task
-    const newInputElement = $('<textarea>').attr('data-id', i);
+    const newInputElement = $('<textarea>');
+    newInputElement.attr('data-id', i).attr('id', 'textarea-' + i);
     newRowElement.append(newInputElement);
 
     // add new button element with class saveBtn
@@ -39,33 +42,28 @@ $.each(workHours, (function (i, hour) {
 
     const dataHours = newInputElement.data('id') + 9;
     if (dataHours > currentTime) {
-
-        newInputElement.addClass('future');
+        newInputElement.addClass('future').removeClass('present');
     } else if (dataHours < currentTime) {
-        newInputElement.addClass('past');
+        newInputElement.addClass('past').removeClass('future');
     } else {
-        newInputElement.addClass('present');
+        newInputElement.addClass('present').removeClass('past');
     }
+
+    renderTasks();
 }));
 
 // add click listner on saveBtn
 $('.saveBtn').on('click', function (event) {
-    console.log(event)
-    const buttonId = $(this).data();
-    const textareaId = event.currentTarget.previousSibling.dataset.id;
-    const textareaValue = event.currentTarget.previousSibling.value.trim();
-    console.log("Button ID: " + JSON.stringify(buttonId))
-    console.log(textareaId)
-    console.log(textareaValue)
+    textareaId = event.currentTarget.previousSibling.dataset.id;
+    textareaValue = event.currentTarget.previousSibling.value.trim();
     if (textareaValue === '') {
         return
     } else {
         taskItems.push({ textareaId: textareaId, textareaValue: textareaValue });
-        console.log(taskItems)
     }
-
     storeTasks();
 })
+console.log(taskItems)
 
 function init() {
     let storedTasks = JSON.parse(localStorage.getItem('taskItems'));
@@ -73,9 +71,20 @@ function init() {
     if (storeTasks !== null) {
         taskItems = storedTasks;
     }
-    console.log(taskItems)
 }
 
 function storeTasks() {
     localStorage.setItem('taskItems', JSON.stringify(taskItems));
+}
+
+function renderTasks() {
+    let taskIndex = '';
+    let taskValue = '';
+
+    for (let j = 0; j < taskItems.length; j++) {
+        taskIndex = taskItems[j].textareaId;
+        taskValue = taskItems[j].textareaValue;
+
+        $('#textarea-' + taskIndex).val(taskValue);
+    }
 }
