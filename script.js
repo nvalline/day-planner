@@ -92,3 +92,10 @@ function renderTasks() {
         $('#textarea-' + taskIndex).val(taskValue);
     }
 }
+
+// add click listner on clearBtn
+$('#clearBtn').on('click', function () {
+    localStorage.clear();
+    taskItems = [];
+    $('textarea').val('');
+})
