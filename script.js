@@ -60,6 +60,10 @@ $('.saveBtn').on('click', function (event) {
     textareaValue = event.currentTarget.previousSibling.value.trim();
     if (textareaValue === '') {
         return
+    } else if ($('textarea').hasClass('past')) {
+        alert('This time block is in the past.');
+        $('textarea').val('');
+        return
     } else {
         taskItems.push({ 'textareaId': textareaId, 'textareaValue': textareaValue });
     }
